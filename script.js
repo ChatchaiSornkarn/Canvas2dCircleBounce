@@ -1,17 +1,14 @@
 var canvas = document.getElementById('myCanvas'); 
 var ctx = canvas.getContext('2d');
-var x = canvas.width / 2;
-var y = canvas.height / 2;
-var radius = Math.random() * (71 - 30) + 30;
-// dx = x velocity 
-var dx = (Math.random() - 0.5) * 10;
-var dy = (Math.random() - 0.5) * 10;
 
 function BackgroundColor(color){
 	ctx.fillStyle = color;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+/*
+ * dx and dy is velocity
+ */
 function Circle(x, y, radius, dx, dy){
 	this.x = x;
 	this.y = y;
@@ -41,13 +38,28 @@ function Circle(x, y, radius, dx, dy){
 	}
 }
 
-var circle = new Circle(x, y, radius, dx, dy);
+/*
+ * circleArray contain 10 circles
+ */
+var circleArray = [];
+for(var i = 0; i < 10; i++){
+	var x = canvas.width / 2;
+	var y = canvas.height / 2;
+	var radius = Math.random() * (71 - 30) + 30;
+	var dx = (Math.random() - 0.5) * 10;
+	var dy = (Math.random() - 0.5) * 10;
+	circleArray.push(new Circle(x, y, radius, dx, dy));
+}
 
 function animate(){
 	requestAnimationFrame(animate);
 	ctx.clearRect(0,0, canvas.width, canvas.height);
+	// update background with gray color first
 	new BackgroundColor('#E9EDEF');
-	circle.update();
+	// update all circles
+	for (var i = 0; i < circleArray.length; i++) {
+		circleArray[i].update();
+	}
 }
 
 animate();
