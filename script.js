@@ -1,5 +1,15 @@
 var canvas = document.getElementById('myCanvas'); 
 var ctx = canvas.getContext('2d');
+/*
+ * If screen retina(pixel is 2 instead of 1) will double the canvas size
+ */ 
+if(window.devicePixelRatio == 2) {
+	canvas.width = 1800;
+	canvas.height = 600;
+	canvas.style.maxWidth = "900px";
+	canvas.style.maxHeight = "300px";
+    ctx.scale(2, 2);
+}
 
 function BackgroundColor(color){
 	ctx.fillStyle = color;
